@@ -27,29 +27,33 @@ class PostularVacante extends Component
     {
         $this->validate();
 
-        // Almacenar el CV
-        $cv = $this->cv->store('public/cv');
-        $datos['cv'] = str_replace('public/cv/', '', $cv);
+        if($this->vacante->candidatos()->where('user_id', auth()->user()->id)->count() > 0) {
+            // Mensaje de error
+            session()->flash('error', 'Ya te has postulado a este vacante');
+        } else {
+            // Almacenar el CV
+            $cv = $this->cv->store('public/cv');
+            $datos['cv'] = str_replace('public/cv/', '', $cv);
 
-        // Crear el candidato a la vacante
-        $this->vacante->candidatos()->create([
-            'user_id' => auth()->user()->id,
-            'cv' => $datos['cv']
-        ]);
+            // Crear el candidato a la vacante
+            $this->vacante->candidatos()->create([
+                'user_id' => auth()->user()->id,
+                'cv' => $datos['cv']
+            ]);
 
-        // Obtener el ID de la vacante
-        $id_vacante = $this->vacante->id;
-        // Obtener el nombre de la vacante
-        $nombre_vacante = $this->vacante->titulo;
+            // Obtener el ID de la vacante
+            $id_vacante = $this->vacante->id;
+            // Obtener el nombre de la vacante
+            $nombre_vacante = $this->vacante->titulo;
 
-        // Crear notificación y enviar el email
-        $this->vacante->reclutador->notify(new NuevoCandidato($id_vacante, $nombre_vacante, auth()->user()->id));
-        
+            // Crear notificación y enviar el email
+            $this->vacante->reclutador->notify(new NuevoCandidato($id_vacante, $nombre_vacante, auth()->user()->id));
+            
+            // Mostrar al usuario un mensaje de éxito
+            session()->flash('mensaje', 'Tu curriculum fue enviado correctamente, gracias por postularte');
 
-        // Mostrar al usuario un mensaje de éxito
-        session()->flash('mensaje', 'Tu curriculum fue enviado correctamente, gracias por postularte');
-
-        return redirect()->back();
+            return redirect()->back();
+        }
     }
 
     public function render()
