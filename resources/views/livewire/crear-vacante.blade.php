@@ -22,7 +22,7 @@
             id="salario" 
             wire:model.fill="salario"
         >
-            <option value="" selected disabled>--Selecciona un rango de precio--</option>
+            <option value="" selected disabled>-- Selecciona un rango de precio --</option>
             @foreach ($salarios as $salario)
                 <option value="{{$salario->id}}">{{$salario->salario}}</option>
             @endforeach
@@ -38,7 +38,7 @@
             id="categoria"
             wire:model.fill="categoria"
         >
-            <option value="" selected disabled>--Selecciona una categoría--</option>
+            <option value="" selected disabled>-- Selecciona una categoría --</option>
             @foreach ($categorias as $categoria)
             <option value="{{$categoria->id}}">{{$categoria->categoria}}</option>
         @endforeach
@@ -78,12 +78,12 @@
 
     <div class="mt-4">
         <x-input-label for="descripcion" :value="__('Descripción')" />
-        <x-textarea
+        <textarea
             placeholder="Descripción general del puesto, experiencia, responsabilidades, requerimientos, beneficios."
-            class="w-full h-72"
+            class="w-full h-72 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
             {{-- name="descripcion" --}}
             wire:model="descripcion"
-        ></x-textarea>
+        ></textarea>
 
         <x-input-error :messages="$errors->get('descripcio')" class="mt-2" />
     </div>

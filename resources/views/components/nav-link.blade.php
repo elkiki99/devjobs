@@ -9,3 +9,7 @@ $classes = ($active ?? false)
 <a {{ $attributes->merge(['class' => $classes]) }}>
     {{ $slot }}
 </a>
+
+{{-- dark:border-indigo-600 dark:text-gray-100 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-700 dark:focus:border-gray-700 dark:focus:text-gray-300
+dark:bg-gray-800
+dark:text-gray-200 --}}

@@ -3,14 +3,14 @@
     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
         @forelse ($vacantes as $vacante)
-            <div class="p-6 bg-white border-b border-gray-200 sm:flex sm:justify-between sm:items-center">
+            <div class="p-6 bg-white border-b border-gray-200 sm:flex sm:justify-between sm:items-center dark:bg-gray-800 dark:text-gray-200">
                 <div class="space-y-5">
                     <a href="{{ route('vacantes.show', $vacante->id) }}" class="text-xl font-bold">
                         {{ $vacante->titulo }}
                     </a>
 
-                    <p class="text-sm text-gray-600 font-bold"> {{ $vacante->empresa }} </p>
-                    <p class="text-sm text-gray-500"> Hasta {{ $vacante->validez->format('d/m/Y') }}</p>
+                    <p class="text-sm text-gray-600 font-bold dark:text-gray-400"> {{ $vacante->empresa }} </p>
+                    <p class="text-sm text-gray-500 dark:text-gray-500"> Hasta {{ $vacante->validez->format('d/m/Y') }}</p>
                 </div>
 
                 <div class="flex sm:flex-col gap-3 items-center my-5">
